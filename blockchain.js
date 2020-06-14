@@ -3,12 +3,17 @@ const time = require('./time');
 
 class Blockchain {
   constructor(name) {
-    this.chain = [this.createGenesisBlock()];
+    this.chain = [];
     this.name = name;
+    this.difficulty = 4;
+
+    this.addGenesisBlock();
   }
 
-  createGenesisBlock() {
-    return new Block(time.getCurrentTime(), 'Genesis Block', '0');
+  addGenesisBlock() {
+    const genesisBlock = new Block(time.getCurrentTime(), 'Genesis Block', '0');
+    genesisBlock.mineBlock(this.difficulty);
+    this.chain.push(genesisBlock);
   }
 
   getLatestBlock() {
@@ -17,7 +22,7 @@ class Blockchain {
 
   addBlock(newBlock) {
     newBlock.previousHash = this.getLatestBlock().hash;
-    newBlock.hash = newBlock.calculateHash();
+    newBlock.mineBlock(this.difficulty);
     this.chain.push(newBlock);
   }
 
