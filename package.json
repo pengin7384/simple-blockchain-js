@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "crypto-js": "^4.0.0",
+    "moment": "^2.26.0",
+    "moment-timezone": "^0.5.31"
+  }
 }
